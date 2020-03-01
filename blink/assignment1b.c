@@ -1,3 +1,26 @@
+
+/**************************************************************
+* Class: CSC-615-01 Spring 2020
+* Name: Danny Daneth Ceron Garcia
+* Student ID: 918581149
+* Project: <project name, like Assignment 1 - Traffic Light
+*
+* File: <assignment1b.c>
+*
+* Description: this program access the Pi's pin's registers to send electrical pulses
+*              to specific pins on the raspbery Pi. there are 3 LED's connect to the raspberry Pi
+*              each LED is connected in series and dues to kirchhoff's law the entire system will have the same current 
+*              regardless of the order in which you connect the LED and the resistor.
+*               
+*              using sys/mman c library we get access to the pi's pin registers and set
+*              them as output, we can set the pin to 1 to send make the LED blink by using GPIO_SET.
+*              then uses GPIO_CLR we reset the pin.
+*
+*              each light has a delay time to give the effect of a traffic light
+* sources: https://www.pieter-jan.com/node/15 
+           https://www.youtube.com/watch?v=NUKD9qESO58
+           https://elinux.org/RPi_GPIO_Code_Samples
+**************************************************************/
 //access from ARM Running linux
 #define BCM2708_PERI_BASE	0x3F000000//s macro contains physical adress value at which the peripheral registers start
 #define GPIO_BASE 	 (BCM2708_PERI_BASE + 0x200000) //GPIO controller
@@ -58,7 +81,7 @@ int main(int argc, char **argv){
         printf("blink\n");
         sleep(1.5);
         GPIO_CLR = 1<<4;
-        sleep(1);
+        sleep(6);
 
         GPIO_SET = 1<<27;
         printf("blink\n");
@@ -68,7 +91,7 @@ int main(int argc, char **argv){
         
         GPIO_SET = 1<<22;
         printf("blink\n");
-        sleep(1.5);
+        sleep(5);
         GPIO_CLR = 1<<22;
         sleep(1);
         
